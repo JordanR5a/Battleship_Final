@@ -1,7 +1,5 @@
 package model;
 
-import utilities.RandomNumGenerator;
-
 public class Artificial extends Player{
     char[][] simulatedBoard;
 
@@ -10,9 +8,7 @@ public class Artificial extends Player{
     }
 
     public int[] artificialAttack(){
-        do{
-
-        } while(true);
+        return null;
     }
 
     public int[] artificialPlacement(){

@@ -7,7 +7,14 @@ public class UI {
     ConsoleIO consoleIO = new ConsoleIO();
 
     public void displayBoard(Board board){
-
+        String boardStr = "";
+        for (int i = 0; i < board.ROW_SIZE; i++) {
+            for (int a = 0; a < board.COL_SIZE; a++) {
+                boardStr += board.getBoard()[i][a] + " ";
+            }
+            boardStr += "\n";
+        }
+        displayMessage(boardStr);
     }
 
     public String promptForString(String prompt, int minLength){

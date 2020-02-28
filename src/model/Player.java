@@ -7,6 +7,7 @@ public class Player {
         S,
         W
     }
+
     private Board homeBoard;
     private Board targetBoard;
     private String name;
@@ -25,6 +26,34 @@ public class Player {
 
     public void attackSpace(int[] space){
 
+    }
+
+    public int[][] placeShip(Ship ship, int[] startingSpace, Direction direction){
+        return null;
+    }
+
+    public boolean checkDeath(){
+        return false;
+    }
+
+    public Board getHomeBoard() {
+        return homeBoard;
+    }
+
+    public Board getTargetBoard() {
+        return targetBoard;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }
 

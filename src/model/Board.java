@@ -1,6 +1,9 @@
 package model;
 
 public class Board {
+    public final int ROW_SIZE = 10;
+    public final int COL_SIZE = 10;
+    char[][] board = new char[ROW_SIZE][COL_SIZE];
     char[][] battleship = new char[10][10];
     char[][] battleshipLabel = new char[][]{
             {'_', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'},
@@ -28,5 +31,9 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    public char[][] getBoard() {
+        return board;
     }
 }

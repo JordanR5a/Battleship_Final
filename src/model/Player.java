@@ -1,13 +1,30 @@
 package model;
 
 public class Player {
-    int i = 34;
-    //TEST
-    // Testing other stuff
+    private enum Direction{
+        N,
+        E,
+        S,
+        W
+    }
+    private Board homeBoard;
+    private Board targetBoard;
+    private String name;
+    private boolean alive;
 
-    int[] array = new int[2];
-    int[] array2 = new int[2];
-    int[][] array1 = {array, array2};
+    public Player(Board homeBoard, Board targetBoard, String name) {
+        this.homeBoard = homeBoard;
+        this.targetBoard = targetBoard;
+        this.name = name;
+        this.alive = true;
+    }
 
+    public void spaceAttacked(int[] space){
+
+    }
+
+    public void attackSpace(int[] space){
+
+    }
 }
 

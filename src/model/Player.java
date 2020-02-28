@@ -5,5 +5,9 @@ public class Player {
     //TEST
     // Testing other stuff
 
+    int[] array = new int[2];
+    int[] array2 = new int[2];
+    int[][] array1 = {array, array2};
+
 }
 

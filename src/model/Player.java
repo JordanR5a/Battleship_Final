@@ -35,5 +35,25 @@ public class Player {
     public boolean checkDeath(){
         return false;
     }
+
+    public Board getHomeBoard() {
+        return homeBoard;
+    }
+
+    public Board getTargetBoard() {
+        return targetBoard;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 }
 

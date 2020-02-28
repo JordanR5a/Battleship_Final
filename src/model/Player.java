@@ -26,5 +26,13 @@ public class Player {
     public void attackSpace(int[] space){
 
     }
+
+    public int[][] placeShip(Ship ship, int[] startingSpace, Direction direction){
+        return null;
+    }
+
+    public boolean checkDeath(){
+        return false;
+    }
 }
 

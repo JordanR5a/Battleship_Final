@@ -7,6 +7,7 @@ public class Player {
         S,
         W
     }
+
     private Board homeBoard;
     private Board targetBoard;
     private String name;

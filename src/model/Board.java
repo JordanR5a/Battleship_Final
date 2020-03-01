@@ -29,8 +29,8 @@ public class Board {
     private void fillNullBoard(){
         int cha = ' ';
         cha = 0;
-        for (int row = 0; row < rowSize; row++) {
-            for (int col = 0; col < colSize; col++) {
+        for (int row = 0; row < ROW_SIZE; row++) {
+            for (int col = 0; col < COL_SIZE; col++) {
                 if (board[row][col] == cha) {
                     System.out.print(board[row][col] = EMPTY_SIGNIFIER);
                 }

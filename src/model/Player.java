@@ -22,19 +22,19 @@ public class Player {
 
     public void spaceAttacked(int[] space){
 
-    }
+    } //TODO
 
     public void attackSpace(int[] space){
 
-    }
+    } //TODO
 
     public int[][] placeShip(Ship ship, int[] startingSpace, Direction direction){
         return null;
-    }
+    } //TODO
 
     public boolean checkDeath(){
         return false;
-    }
+    } //TODO
 
     public Board getHomeBoard() {
         return homeBoard;

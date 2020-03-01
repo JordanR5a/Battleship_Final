@@ -1,7 +1,7 @@
 package model;
 
 public class Board {
-    public final char[] COL_SIGNIFIERS = new char[]{};
+    public final char[] COL_SIGNIFIERS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
     public final int ROW_SIZE = 10;
     public final int COL_SIZE = 10;
 
@@ -10,19 +10,26 @@ public class Board {
     private final char MISS_SIGNIFIER = 'M';
     private final char EMPTY_SIGNIFIER = 'E';
 
-    private final int[][] CARRIER_LOCATION = new int[Ship.CARRIER.getSize()][1];
-    private final int[][] BATTLESHIP_LOCATION= new int[Ship.BATTLESHIP.getSize()][1];
-    private final int[][] DESTROYER_LOCATION= new int[Ship.DESTROYER.getSize()][1];
-    private final int[][] SUBMARINE_LOCATION= new int[Ship.SUBMARINE.getSize()][1];
-    private final int[][] PATROL_COAT_LOCATION= new int[Ship.PATROL_BOAT.getSize()][1];
+    private int[][] CARRIER_LOCATION;
+    private int[][] BATTLESHIP_LOCATION;
+    private int[][] DESTROYER_LOCATION;
+    private int[][] SUBMARINE_LOCATION;
+    private int[][] PATROL_COAT_LOCATION;
 
     char[][] board = new char[ROW_SIZE][COL_SIZE];
 
-    public void board() {
-        fillNullBoard();
+    public Board(int[][] CARRIER_LOCATION, int[][] BATTLESHIP_LOCATION, int[][] DESTROYER_LOCATION, int[][] SUBMARINE_LOCATION, int[][] PATROL_COAT_LOCATION, char[][] board) {
+        this.CARRIER_LOCATION = CARRIER_LOCATION;
+        this.BATTLESHIP_LOCATION = BATTLESHIP_LOCATION;
+        this.DESTROYER_LOCATION = DESTROYER_LOCATION;
+        this.SUBMARINE_LOCATION = SUBMARINE_LOCATION;
+        this.PATROL_COAT_LOCATION = PATROL_COAT_LOCATION;
+        this.board = fillNullBoard();
     }
 
     public char[][] getBoard() {
+        int[][] array = new int[2][2];
+        PATROL_COAT_LOCATION = array;
         return board;
     }
 

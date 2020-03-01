@@ -1,16 +1,14 @@
 package model;
 
-import view.UI;
-
 public class Board {
     public final char[] COL_SIGNIFIERS = {'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
     public final int ROW_SIZE = 10;
     public final int COL_SIZE = 10;
 
-    private final char SHIP_SIGNIFIER = 'S';
-    private final char HIT_SIGNIFIER = 'H';
-    private final char MISS_SIGNIFIER = 'M';
-    private final char EMPTY_SIGNIFIER = 'E';
+    public final char SHIP_SIGNIFIER = 'S';
+    public final char HIT_SIGNIFIER = 'H';
+    public final char MISS_SIGNIFIER = 'M';
+    public final char EMPTY_SIGNIFIER = 'E';
 
     private int[][] CARRIER_LOCATION;
     private int[][] BATTLESHIP_LOCATION;
@@ -49,5 +47,25 @@ public class Board {
 
     public void mutateSpace(int[] space, char signifier) {
             board[space[0]][space[1]] = signifier;
+    }
+
+    public int[][] getCARRIER_LOCATION() {
+        return CARRIER_LOCATION;
+    }
+
+    public int[][] getBATTLESHIP_LOCATION() {
+        return BATTLESHIP_LOCATION;
+    }
+
+    public int[][] getDESTROYER_LOCATION() {
+        return DESTROYER_LOCATION;
+    }
+
+    public int[][] getSUBMARINE_LOCATION() {
+        return SUBMARINE_LOCATION;
+    }
+
+    public int[][] getPATROL_COAT_LOCATION() {
+        return PATROL_COAT_LOCATION;
     }
 }

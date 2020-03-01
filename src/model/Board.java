@@ -1,7 +1,7 @@
 package model;
 
 public class Board {
-    public final char[] COL_SIGNIFIERS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    public final char[] COL_SIGNIFIERS = new char[]{'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
     public final int ROW_SIZE = 10;
     public final int COL_SIZE = 10;
 
@@ -28,53 +28,24 @@ public class Board {
     }
 
     public char[][] getBoard() {
-        int[][] array = new int[2][2];
-        PATROL_COAT_LOCATION = array;
         return board;
     }
 
-    private void fillNullBoard(){
-        int cha = ' ';
-        cha = 0;
+    private char[][] fillNullBoard(){
         for (int row = 0; row < ROW_SIZE; row++) {
             for (int col = 0; col < COL_SIZE; col++) {
-                if (board[row][col] == cha) {
-                    System.out.print(board[row][col] = EMPTY_SIGNIFIER);
-                }
+                System.out.print(board[row][col] = EMPTY_SIGNIFIER);
             }
             System.out.println();
         }
+        return board;
     }
 
     public char checkSpace(int[] space){
-        char chRE = ' ';
-        if (board[space[0]][space[1]] == EMPTY_SIGNIFIER){
-            chRE = EMPTY_SIGNIFIER;
-        }
-        if (board[space[0]][space[1]] == HIT_SIGNIFIER){
-            chRE = HIT_SIGNIFIER;
-        }
-        if (board[space[0]][space[1]] == MISS_SIGNIFIER){
-            chRE = MISS_SIGNIFIER;
-        }
-        if (board[space[0]][space[1]] == SHIP_SIGNIFIER){
-            chRE = SHIP_SIGNIFIER;
-        }
-        return chRE;
+        return board[space[0]][space[1]];
     }
 
     public void mutateSpace(int[] space, char signifier) {
-        if (signifier == EMPTY_SIGNIFIER){
-            board[space[0]][space[1]] = EMPTY_SIGNIFIER;
-        }
-        if (signifier == HIT_SIGNIFIER){
-            board[space[0]][space[1]] = HIT_SIGNIFIER;
-        }
-        if (signifier == MISS_SIGNIFIER){
-            board[space[0]][space[1]] = MISS_SIGNIFIER;
-        }
-        if (signifier == SHIP_SIGNIFIER){
-            board[space[0]][space[1]] = SHIP_SIGNIFIER;
-        }
+            board[space[0]][space[1]] = signifier;
     }
 }

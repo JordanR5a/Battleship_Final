@@ -1,7 +1,9 @@
 package model;
 
+import view.UI;
+
 public class Board {
-    public final char[] COL_SIGNIFIERS = new char[]{'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    public final char[] COL_SIGNIFIERS = {'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
     public final int ROW_SIZE = 10;
     public final int COL_SIZE = 10;
 
@@ -16,7 +18,7 @@ public class Board {
     private int[][] SUBMARINE_LOCATION;
     private int[][] PATROL_COAT_LOCATION;
 
-    char[][] board = new char[ROW_SIZE][COL_SIZE];
+    private char[][] board;
 
     public Board(int[][] CARRIER_LOCATION, int[][] BATTLESHIP_LOCATION, int[][] DESTROYER_LOCATION, int[][] SUBMARINE_LOCATION, int[][] PATROL_COAT_LOCATION, char[][] board) {
         this.CARRIER_LOCATION = CARRIER_LOCATION;
@@ -32,11 +34,11 @@ public class Board {
     }
 
     private char[][] fillNullBoard(){
+        char[][] board = new char[ROW_SIZE][COL_SIZE];
         for (int row = 0; row < ROW_SIZE; row++) {
             for (int col = 0; col < COL_SIZE; col++) {
-                System.out.print(board[row][col] = EMPTY_SIGNIFIER);
+                board[row][col] = EMPTY_SIGNIFIER;
             }
-            System.out.println();
         }
         return board;
     }

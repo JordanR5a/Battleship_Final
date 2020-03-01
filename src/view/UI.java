@@ -10,7 +10,7 @@ public class UI {
         String boardStr = "";
         for (int i = 0; i < board.ROW_SIZE; i++) {
             for (int a = 0; a < board.COL_SIZE; a++) {
-                boardStr += board.getBoard()[i][a] + " ";
+                boardStr += board.getBoard()[i][a] + "  ";
             }
             boardStr += "\n";
         }

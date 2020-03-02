@@ -88,23 +88,5 @@ public class Player {
         return name;
     }
 
-    public static void main(String[] args) {
-        Player player1 = new Player(new Board(), new Board(), "player1");
-        Player player2 = new Player(new Board(), new Board(), "player2");
-        UI ui = new UI();
-        int[] array = {0, 0};
-        int[] array1 = {0, 1};
-        int[] array2 = {0, 2};
-        int[] array3 = {0, 3};
-        int[] array4 = {0, 4};
-        int[] array5 = {0, 5};
-        player1.getHomeBoard().setCARRIER_LOCATION(player1.placeShip(Ship.CARRIER, array, Direction.S));
-        player1.getHomeBoard().setBATTLESHIP_LOCATION(player1.placeShip(Ship.BATTLESHIP, array1, Direction.S));
-        player1.getHomeBoard().setDESTROYER_LOCATION(player1.placeShip(Ship.DESTROYER, array2, Direction.S));
-        player1.getHomeBoard().setSUBMARINE_LOCATION(player1.placeShip(Ship.SUBMARINE, array3, Direction.S));
-        player1.getHomeBoard().setPATROL_COAT_LOCATION(player1.placeShip(Ship.PATROL_BOAT, array4, Direction.S));
-        System.out.println(player1.isDead());
-
-    }
 }
 

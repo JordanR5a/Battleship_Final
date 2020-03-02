@@ -13,13 +13,11 @@ public class Player {
     private Board homeBoard;
     private Board targetBoard;
     private String name;
-    private boolean alive;
 
     public Player(Board homeBoard, Board targetBoard, String name) {
         this.homeBoard = homeBoard;
         this.targetBoard = targetBoard;
         this.name = name;
-        this.alive = true;
     }
 
     public void spaceAttacked(int[] space){
@@ -40,8 +38,9 @@ public class Player {
 
     public int[][] placeShip(Ship ship, int[] startingSpace, Direction direction){
         int[][] loc = new int[ship.getSize()][2];
+        boolean acceptable = true;
         for (int i = 0; i < ship.getSize(); i++) {
-            homeBoard.mutateSpace(startingSpace, homeBoard.SHIP_SIGNIFIER);
+            if (homeBoard.checkSpace(startingSpace) != homeBoard.EMPTY_SIGNIFIER) acceptable = false;
             if (direction == Direction.N){
                 startingSpace[0] -= 1;
             } else if (direction == Direction.E){
@@ -53,13 +52,29 @@ public class Player {
             }
             loc[i] = startingSpace;
         }
-        return loc;
+        if (acceptable){
+            for (int i = 0; i < loc.length; i++) {
+                homeBoard.mutateSpace(loc[i], homeBoard.SHIP_SIGNIFIER);
+            }
+            return loc;
+        } else throw new IllegalArgumentException("Ships cannot overlap");
     }
 
-    public boolean checkDeath(){
-
-        return false;
-    } //TODO
+    public boolean isDead(){
+        int[][][] locations = {homeBoard.getCARRIER_LOCATION(), homeBoard.getBATTLESHIP_LOCATION(),
+                homeBoard.getDESTROYER_LOCATION(), homeBoard.getSUBMARINE_LOCATION(),
+                homeBoard.getPATROL_COAT_LOCATION()};
+        int destroyedShips = 0;
+        boolean destroyed = false;
+        for (int[][] loc : locations){
+            for (int[] space : loc){
+                destroyed = true;
+                if (homeBoard.checkSpace(space) == homeBoard.SHIP_SIGNIFIER) destroyed = false;
+            }
+            if (destroyed) destroyedShips++;
+        }
+        return (Ship.values().length == destroyedShips);
+    }
 
     public Board getHomeBoard() {
         return homeBoard;
@@ -73,25 +88,22 @@ public class Player {
         return name;
     }
 
-    public boolean isAlive() {
-        return alive;
-    }
-
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
-
     public static void main(String[] args) {
         Player player1 = new Player(new Board(), new Board(), "player1");
         Player player2 = new Player(new Board(), new Board(), "player2");
         UI ui = new UI();
-        int[] array = {5, 5};
-        player1.getHomeBoard().setBATTLESHIP_LOCATION(player1.placeShip(Ship.BATTLESHIP, array, Direction.N));
-        int[] array2 = {0, 5};
-        player2.attackSpace(array2, player1.homeBoard);
-        player1.spaceAttacked(array2);
-        ui.displayBoard(player2.targetBoard);
-        ui.displayBoard(player1.homeBoard);
+        int[] array = {0, 0};
+        int[] array1 = {0, 1};
+        int[] array2 = {0, 2};
+        int[] array3 = {0, 3};
+        int[] array4 = {0, 4};
+        int[] array5 = {0, 5};
+        player1.getHomeBoard().setCARRIER_LOCATION(player1.placeShip(Ship.CARRIER, array, Direction.S));
+        player1.getHomeBoard().setBATTLESHIP_LOCATION(player1.placeShip(Ship.BATTLESHIP, array1, Direction.S));
+        player1.getHomeBoard().setDESTROYER_LOCATION(player1.placeShip(Ship.DESTROYER, array2, Direction.S));
+        player1.getHomeBoard().setSUBMARINE_LOCATION(player1.placeShip(Ship.SUBMARINE, array3, Direction.S));
+        player1.getHomeBoard().setPATROL_COAT_LOCATION(player1.placeShip(Ship.PATROL_BOAT, array4, Direction.S));
+        System.out.println(player1.isDead());
 
     }
 }

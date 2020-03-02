@@ -8,7 +8,7 @@ public class Board {
     public final char SHIP_SIGNIFIER = 'S';
     public final char HIT_SIGNIFIER = 'H';
     public final char MISS_SIGNIFIER = 'M';
-    public final char EMPTY_SIGNIFIER = 'E';
+    public final char EMPTY_SIGNIFIER = 'L';
 
     private int[][] CARRIER_LOCATION;
     private int[][] BATTLESHIP_LOCATION;
@@ -18,12 +18,7 @@ public class Board {
 
     private char[][] board;
 
-    public Board(int[][] CARRIER_LOCATION, int[][] BATTLESHIP_LOCATION, int[][] DESTROYER_LOCATION, int[][] SUBMARINE_LOCATION, int[][] PATROL_COAT_LOCATION, char[][] board) {
-        this.CARRIER_LOCATION = CARRIER_LOCATION;
-        this.BATTLESHIP_LOCATION = BATTLESHIP_LOCATION;
-        this.DESTROYER_LOCATION = DESTROYER_LOCATION;
-        this.SUBMARINE_LOCATION = SUBMARINE_LOCATION;
-        this.PATROL_COAT_LOCATION = PATROL_COAT_LOCATION;
+    public Board() {
         this.board = fillNullBoard();
     }
 
@@ -47,6 +42,26 @@ public class Board {
 
     public void mutateSpace(int[] space, char signifier) {
             board[space[0]][space[1]] = signifier;
+    }
+
+    public void setCARRIER_LOCATION(int[][] CARRIER_LOCATION) {
+        this.CARRIER_LOCATION = CARRIER_LOCATION;
+    }
+
+    public void setBATTLESHIP_LOCATION(int[][] BATTLESHIP_LOCATION) {
+        this.BATTLESHIP_LOCATION = BATTLESHIP_LOCATION;
+    }
+
+    public void setDESTROYER_LOCATION(int[][] DESTROYER_LOCATION) {
+        this.DESTROYER_LOCATION = DESTROYER_LOCATION;
+    }
+
+    public void setSUBMARINE_LOCATION(int[][] SUBMARINE_LOCATION) {
+        this.SUBMARINE_LOCATION = SUBMARINE_LOCATION;
+    }
+
+    public void setPATROL_COAT_LOCATION(int[][] PATROL_COAT_LOCATION) {
+        this.PATROL_COAT_LOCATION = PATROL_COAT_LOCATION;
     }
 
     public int[][] getCARRIER_LOCATION() {

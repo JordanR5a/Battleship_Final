@@ -41,7 +41,47 @@ public class Board {
     }
 
     public void mutateSpace(int[] space, char signifier) {
-            board[space[0]][space[1]] = signifier;
+        board[space[0]][space[1]] = signifier;
+    }
+
+    public void setCARRIER_LOCATION(int[][] CARRIER_LOCATION) {
+        this.CARRIER_LOCATION = CARRIER_LOCATION;
+    }
+
+    public void setBATTLESHIP_LOCATION(int[][] BATTLESHIP_LOCATION) {
+        this.BATTLESHIP_LOCATION = BATTLESHIP_LOCATION;
+    }
+
+    public void setDESTROYER_LOCATION(int[][] DESTROYER_LOCATION) {
+        this.DESTROYER_LOCATION = DESTROYER_LOCATION;
+    }
+
+    public void setSUBMARINE_LOCATION(int[][] SUBMARINE_LOCATION) {
+        this.SUBMARINE_LOCATION = SUBMARINE_LOCATION;
+    }
+
+    public void setPATROL_COAT_LOCATION(int[][] PATROL_COAT_LOCATION) {
+        this.PATROL_COAT_LOCATION = PATROL_COAT_LOCATION;
+    }
+
+    public int[][] getCARRIER_LOCATION() {
+        return CARRIER_LOCATION;
+    }
+
+    public int[][] getBATTLESHIP_LOCATION() {
+        return BATTLESHIP_LOCATION;
+    }
+
+    public int[][] getDESTROYER_LOCATION() {
+        return DESTROYER_LOCATION;
+    }
+
+    public int[][] getSUBMARINE_LOCATION() {
+        return SUBMARINE_LOCATION;
+    }
+
+    public int[][] getPATROL_COAT_LOCATION() {
+        return PATROL_COAT_LOCATION;
     }
 
     public void setCARRIER_LOCATION(int[][] CARRIER_LOCATION) {

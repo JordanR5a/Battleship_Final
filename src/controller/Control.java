@@ -5,6 +5,7 @@ import view.UI;
 
 public class Control {
     private final String[] mainMenu = {"Human vs Human", "Human vs Computer", "Exit"};
+    private final String[] turnMenu = {"Show Board", "Target the Enemy"};
     private UI ui = new UI();
     private Player[] players;
     private static final String DEFAULT_PLAYER_1_NAME = "Player 1";
@@ -12,6 +13,13 @@ public class Control {
 
     public static void main(String[] args) {
 
+    }
+
+    private void main(){
+        int input = 0;
+        do{
+            ui.promptForMenuSelection(mainMenu);
+        } while (mainMenu.length != input);
     }
 
     private void game(){

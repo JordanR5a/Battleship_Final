@@ -1,7 +1,11 @@
 package controller;
 
+import model.Player;
+import view.UI;
+
 public class Control {
     private final String[] mainMenu = {""};
+    private UI ui = new UI();
     private Player[] players;
     private static final String DEFAULT_PLAYER_1_NAME = "Player 1";
     private static final String DEFAULT_PLAYER_2_NAME = "Player 2";
@@ -30,12 +34,11 @@ public class Control {
     }
 
     private void declareOutcome(){
-        Player outcome = new Player();
-        if (outcome.isDead()){
-            //PLAYER 1 WIN
+        if (players[1].isDead()){
+            ui.displayMessage("I love you Recce");
         }
-        if (outcome.isDead()){
-            //PLAYER 2 WIN
+        else if (players[0].isDead()){
+            ui.displayMessage("Player 1 wins");
         }
-    } // TODO
+    }
 }

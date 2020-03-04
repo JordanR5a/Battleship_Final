@@ -4,7 +4,10 @@ import model.Artificial;
 import model.Board;
 import model.Natural;
 import model.Player;
+import utilities.RandomNumGenerator;
 import view.UI;
+
+import java.util.Random;
 
 public class Control {
     private final String[] mainMenu = {"Human vs Human", "Human vs Computer", "Exit"};
@@ -35,7 +38,7 @@ public class Control {
     }
 
     private void createPlayer(Player[] players){
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < players.length; i++) {
             if (players[i].getClass() == Artificial.class) this.players[i] = new Artificial(
                     new Board(), new Board(), DEFAULT_NAMES[i]);
             if (players[i].getClass() == Natural.class) this.players[i] = new Natural(new Board(), new Board(),
@@ -43,9 +46,15 @@ public class Control {
         }
     }
 
-    private void game(){
-        do{
+    private void playerTurn(int playerIndex){
 
+    }
+
+    private void game(){
+        int current = RandomNumGenerator.randomNum(0,1);
+        do{
+            if (current == 0) playerTurn(current++);
+            else playerTurn(current--);
             declareOutcome();
         } while (!players[0].isDead() && !players[1].isDead());
     } // TODO

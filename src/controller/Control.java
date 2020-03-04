@@ -7,6 +7,7 @@ public class Control {
     private Player[] players;
     private static final String DEFAULT_PLAYER_1_NAME = "Player 1";
     private static final String DEFAULT_PLAYER_2_NAME = "Player 2";
+    private static String test;
 
     public static void main(String[] args) {
 

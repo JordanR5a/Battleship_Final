@@ -7,7 +7,6 @@ import model.Player;
 import utilities.RandomNumGenerator;
 import view.UI;
 
-import java.util.Random;
 
 public class Control {
     private final String[] mainMenu = {"Human vs Human", "Human vs Computer", "Exit"};
@@ -47,6 +46,23 @@ public class Control {
     }
 
     private void playerTurn(int playerIndex){
+        int input = ui.promptForMenuSelection(turnMenu);
+        do{
+            switch (input){
+                case 1:
+                    ui.displayBoard(players[playerIndex].getHomeBoard());
+                    break;
+                case 2:
+                    ui.displayBoard(players[playerIndex].getTargetBoard());
+                    int enemy;
+                    if (playerIndex == 0) enemy = 1;
+                    else enemy = 0;
+                    int[] space = translate(ui.promptForString("Please enter the space you wish to target", 2));
+                    players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
+                    players[enemy].spaceAttacked(space);
+                    break;
+            }
+        } while (input != turnMenu.length);
 
     }
 
@@ -55,8 +71,8 @@ public class Control {
         do{
             if (current == 0) playerTurn(current++);
             else playerTurn(current--);
-            declareOutcome();
         } while (!players[0].isDead() && !players[1].isDead());
+        declareOutcome();
     } // TODO
 
     private int[] translate(String space){

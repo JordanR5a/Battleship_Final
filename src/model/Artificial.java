@@ -3,6 +3,9 @@ package model;
 public class Artificial extends Player{
     char[][] simulatedBoard;
 
+    public Artificial() {
+    }
+
     public Artificial(Board homeBoard, Board targetBoard, String name) {
         super(homeBoard, targetBoard, name);
     }

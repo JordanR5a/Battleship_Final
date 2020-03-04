@@ -1,5 +1,8 @@
 package controller;
 
+import model.Artificial;
+import model.Board;
+import model.Natural;
 import model.Player;
 import view.UI;
 
@@ -8,8 +11,7 @@ public class Control {
     private final String[] turnMenu = {"Show Board", "Target the Enemy"};
     private UI ui = new UI();
     private Player[] players;
-    private static final String DEFAULT_PLAYER_1_NAME = "Player 1";
-    private static final String DEFAULT_PLAYER_2_NAME = "Player 2";
+    private  static final String[] DEFAULT_NAMES= {"Player 1", "Player 2"};
 
     public static void main(String[] args) {
 
@@ -18,8 +20,27 @@ public class Control {
     private void main(){
         int input = 0;
         do{
-            ui.promptForMenuSelection(mainMenu);
+            input = ui.promptForMenuSelection(mainMenu);
+            switch (input){
+                case 1:
+                    createPlayer(new Player[]{new Natural(), new Natural()});
+                    game();
+                    break;
+                case 2:
+                    createPlayer(new Player[]{new Natural(), new Artificial()});
+                    game();
+                    break;
+            }
         } while (mainMenu.length != input);
+    }
+
+    private void createPlayer(Player[] players){
+        for (int i = 0; i < 2; i++) {
+            if (players[i].getClass() == Artificial.class) this.players[i] = new Artificial(
+                    new Board(), new Board(), DEFAULT_NAMES[i]);
+            if (players[i].getClass() == Natural.class) this.players[i] = new Natural(new Board(), new Board(),
+                    ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
+        }
     }
 
     private void game(){

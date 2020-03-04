@@ -14,6 +14,9 @@ public class Player {
     private Board targetBoard;
     private String name;
 
+    public Player() {
+    }
+
     public Player(Board homeBoard, Board targetBoard, String name) {
         this.homeBoard = homeBoard;
         this.targetBoard = targetBoard;

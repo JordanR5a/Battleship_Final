@@ -18,8 +18,13 @@ public class Artificial extends Player{
     }//TODO
 
     public int[] artificialPlacement(){
+
         return null;
     }//TODO
+
+    public Direction artificialDirection(){
+        return null;
+    } //TODO
 
     private char[][] simulatedArray() {
         char[][] simulation = new char[getTargetBoard().ROW_SIZE][getTargetBoard().COL_SIZE];

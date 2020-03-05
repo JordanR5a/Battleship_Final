@@ -36,26 +36,42 @@ public class Control {
 
     private void createPlayer(Player[] players){
         for (int i = 0; i < players.length; i++) {
-            if (players[i].getClass() == Artificial.class) this.players[i] = new Artificial(
-                    new Board("Home Board"), new Board("Target Board"), DEFAULT_NAMES[i]);
+            if (players[i].getClass() == Artificial.class) {
+                this.players[i] = new Artificial(new Board("Home Board"),
+                        new Board("Target Board"), DEFAULT_NAMES[i]);
+                placeArtificialShips((Artificial)this.players[i]);
+            }
             else if (players[i].getClass() == Natural.class) {
                 this.players[i] = new Natural(new Board("Home Board"), new Board("Target Board"),
                         ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
-                placeShips(i);
+                placeShips(this.players[i]);
             }
         }
     }
 
-    private void placeShips(int player){
+    private void placeArtificialShips(Artificial player){
         boolean replay;
         for(Ship ship : Ship.values()){
             do{
                 try{
-                    this.players[player].getHomeBoard().setLocation(this.players[player].placeShip(ship, translate(ui.promptForString(String.format(
-                            "Please enter the starting space of %s's %s", this.players[player].getName(), ship.toString()), 2)),
-                            Player.Direction.valueOfSpecial(ui.promptForString(String.format("Please enter the direction (N, E, S, W) for %s's %s",
-                                    this.players[player].getName(), ship.toString()), 1).toUpperCase())), ship);
-                    ui.displayBoard(this.players[player].getHomeBoard());
+                    player.getHomeBoard().setLocation(player.placeShip(ship, player.artificialPlacement(),
+                            player.artificialDirection()), ship);
+                    replay = false;
+                } catch (IllegalArgumentException ex) { replay = true; }
+            } while (replay);
+        }
+    }
+
+    private void placeShips(Player player){
+        boolean replay;
+        for(Ship ship : Ship.values()){
+            do{
+                try{
+                    player.getHomeBoard().setLocation(player.placeShip(ship, translate(ui.promptForString(String.format(
+                            "Please enter the starting space of %s's %s", player.getName(), ship.toString()), 2)),
+                            Direction.valueOfSpecial(ui.promptForString(String.format("Please enter the direction (N, E, S, W) for %s's %s",
+                                    player.getName(), ship.toString()), 1).toUpperCase())), ship);
+                    ui.displayBoard(player.getHomeBoard());
                     replay = false;
                 } catch (IllegalArgumentException ex) {
                     ui.displayError(ex.getMessage());
@@ -66,34 +82,41 @@ public class Control {
     }
 
     private void playerTurn(int playerIndex){
-        int input;
-        do{
-            ui.displayMessage(String.format("%s's options:", players[playerIndex].getName()));
-            input = ui.promptForMenuSelection(turnMenu);
-            switch (input){
-                case 1:
-                    ui.displayBoard(players[playerIndex].getHomeBoard());
-                    break;
-                case 2:
-                    ui.displayBoard(players[playerIndex].getTargetBoard());
-                    int enemy;
-                    if (playerIndex == 0) enemy = 1;
-                    else enemy = 0;
-                    int[] space = translate(ui.promptForString("Please enter the space you wish to target", 2));
-                    players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
-                    ui.displayBoard(players[playerIndex].getTargetBoard());
-                    players[enemy].spaceAttacked(space);
-                    break;
-            }
-        } while (input != turnMenu.length);
+        if (players[playerIndex].getClass() == Natural.class) {
+            int input;
+            do {
+                ui.displayMessage(String.format("%s's options:", players[playerIndex].getName()));
+                input = ui.promptForMenuSelection(turnMenu);
+                switch (input) {
+                    case 1:
+                        ui.displayBoard(players[playerIndex].getHomeBoard());
+                        break;
+                    case 2:
+                        ui.displayBoard(players[playerIndex].getTargetBoard());
+                        int enemy;
+                        if (playerIndex == 0) enemy = 1;
+                        else enemy = 0;
+                        int[] space = translate(ui.promptForString("Please enter the space you wish to target", 2));
+                        players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
+                        ui.displayBoard(players[playerIndex].getTargetBoard());
+                        players[enemy].spaceAttacked(space);
+                        break;
+                }
+            } while (input != turnMenu.length);
+        } else if (players[playerIndex].getClass() == Artificial.class){
 
+        }
     }
 
     private void game(){
         int current = RandomNumGenerator.randomNum(0,1);
         do{
-            if (current == 0) playerTurn(current++);
-            else playerTurn(current--);
+            if (current == 0){
+                playerTurn(current++);
+            }
+            else{
+                playerTurn(current--);
+            }
         } while (!players[0].isDead() && !players[1].isDead());
         declareOutcome();
     }

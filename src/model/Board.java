@@ -1,7 +1,7 @@
 package model;
 
 public class Board {
-    public final char[] COL_SIGNIFIERS = {'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    public static final char[] COL_SIGNIFIERS = {'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
     public final int ROW_SIZE = 10;
     public final int COL_SIZE = 10;
 
@@ -68,6 +68,28 @@ public class Board {
 
     public void setPATROL_COAT_LOCATION(int[][] PATROL_COAT_LOCATION) {
         this.PATROL_COAT_LOCATION = PATROL_COAT_LOCATION;
+    }
+
+    public void setLocation(int[][] location, Ship ship){
+        switch (ship){
+            case CARRIER:
+                setCARRIER_LOCATION(location);
+                break;
+            case BATTLESHIP:
+                setBATTLESHIP_LOCATION(location);
+                break;
+            case DESTROYER:
+                setDESTROYER_LOCATION(location);
+                break;
+            case SUBMARINE:
+                setSUBMARINE_LOCATION(location);
+                break;
+            case PATROL_BOAT:
+                setPATROL_COAT_LOCATION(location);
+                break;
+            default:
+                throw new IllegalStateException("This code must be updated with all available ships");
+        }
     }
 
     public int[][] getCARRIER_LOCATION() {

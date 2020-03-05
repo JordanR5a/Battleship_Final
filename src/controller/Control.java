@@ -51,10 +51,10 @@ public class Control {
         for(Ship ship : Ship.values()){
             do{
                 try{
-                    this.players[player].placeShip(ship, translate(ui.promptForString(String.format(
+                    this.players[player].getHomeBoard().setLocation(this.players[player].placeShip(ship, translate(ui.promptForString(String.format(
                             "Please enter the starting space of %s's %s", this.players[player].getName(), ship.toString()), 2)),
                             Player.Direction.valueOfSpecial(ui.promptForString(String.format("Please enter the direction (N, E, S, W) for %s's %s",
-                                    this.players[player].getName(), ship.toString()), 1).toUpperCase()));
+                                    this.players[player].getName(), ship.toString()), 1).toUpperCase())), ship);
                     ui.displayBoard(this.players[player].getHomeBoard());
                     replay = false;
                 } catch (IllegalArgumentException ex) {
@@ -68,6 +68,7 @@ public class Control {
     private void playerTurn(int playerIndex){
         int input;
         do{
+            ui.displayMessage(String.format("%s's options:", players[playerIndex].getName()));
             input = ui.promptForMenuSelection(turnMenu);
             switch (input){
                 case 1:
@@ -80,6 +81,7 @@ public class Control {
                     else enemy = 0;
                     int[] space = translate(ui.promptForString("Please enter the space you wish to target", 2));
                     players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
+                    ui.displayBoard(players[playerIndex].getTargetBoard());
                     players[enemy].spaceAttacked(space);
                     break;
             }
@@ -97,10 +99,11 @@ public class Control {
     }
 
     private int[] translate(String space){
-        if(space.length() != 2) throw new IllegalStateException("space must have two characters");
-        String row = space.trim().substring(0, 1), col = space.trim().substring(1);
+        if(space.length() != 2) throw new IllegalArgumentException("space must have two characters");
+        String row = space.trim().substring(0, 1), col = space.trim().substring(1).toUpperCase();
+        char charCol = col.charAt(0);
         int inrow = Integer.parseInt(row);
-        return new int[]{inrow, colSel(col)};
+        return new int[]{(inrow - 1), colSel(charCol)};
     }
 
     private String translate(int[] space){
@@ -120,40 +123,11 @@ public class Control {
         }
     }
 
-    private int colSel(String col){
-        int colo = 0;
-        switch (col){
-            case "A":
-                colo = 0;
-                break;
-            case "B":
-                colo = 1;
-                break;
-            case "C":
-                colo = 2;
-                break;
-            case "D":
-                colo = 3;
-                break;
-            case "E":
-                colo = 4;
-                break;
-            case "F":
-                colo = 5;
-                break;
-            case "G":
-                colo = 6;
-                break;
-            case "H":
-                colo = 7;
-                break;
-            case "I":
-                colo = 8;
-                break;
-            case "J":
-                colo = 9;
-                break;
+    private int colSel(char col){
+        int colInt = -1;
+        for (int i = 0; i < Board.COL_SIGNIFIERS.length; i++) {
+            if (col == Board.COL_SIGNIFIERS[i]) colInt = i;
         }
-        return colo;
+        return colInt;
     }
 }

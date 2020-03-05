@@ -1,5 +1,7 @@
 package model;
 
+import view.UI;
+
 public class Player {
     public enum Direction{
         N,
@@ -50,6 +52,9 @@ public class Player {
         boolean acceptable = true;
         for (int i = 0; i < ship.getSize(); i++) {
             if (homeBoard.checkSpace(startingSpace) != homeBoard.EMPTY_SIGNIFIER) acceptable = false;
+            for (int j = 0; j < loc[i].length; j++) {
+                loc[i][j] = startingSpace[j];
+            }
             if (direction == Direction.N){
                 startingSpace[0] -= 1;
             } else if (direction == Direction.E){
@@ -58,9 +63,6 @@ public class Player {
                 startingSpace[0] += 1;
             } else if ((direction == Direction.W)){
                 startingSpace[1] -= 1;
-            }
-            for (int j = 0; j < loc[i].length; j++) {
-                loc[i][j] = startingSpace[j];
             }
         }
         if (acceptable){
@@ -98,5 +100,17 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public static void main(String[] args) {
+        Natural player1 = new Natural(new Board("jdsaf"), new Board("dsafhs"), "player 1");
+        player1.getHomeBoard().setCARRIER_LOCATION(player1.placeShip(Ship.CARRIER, new int[]{0, 0}, Direction.S));
+        player1.getHomeBoard().setBATTLESHIP_LOCATION(player1.placeShip(Ship.BATTLESHIP, new int[]{0, 1}, Direction.S));
+        player1.getHomeBoard().setDESTROYER_LOCATION(player1.placeShip(Ship.DESTROYER, new int[]{0, 2}, Direction.S));
+        player1.getHomeBoard().setSUBMARINE_LOCATION(player1.placeShip(Ship.SUBMARINE, new int[]{0, 3}, Direction.S));
+        player1.getHomeBoard().setPATROL_COAT_LOCATION(player1.placeShip(Ship.PATROL_BOAT, new int[]{0, 4}, Direction.S));
+        new UI().displayBoard(player1.getHomeBoard());
+        System.out.println(player1.isDead());
+    }
+
 }
 

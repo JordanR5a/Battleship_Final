@@ -1,7 +1,10 @@
 package model;
 
+import controller.Control;
+
 public class Artificial extends Player{
-    Board simulatedBoard;
+    private Board simulatedBoard;
+    private Control simulatedControl;
 
     public Artificial() {
     }

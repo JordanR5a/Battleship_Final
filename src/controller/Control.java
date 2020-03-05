@@ -21,9 +21,9 @@ public class Control {
     } // TODO
 
     private int[] translate(String space){
-        String row = space.substring(0, 1), col = space.substring(1);
-        int inrow = Integer.parseInt(row), inCol = Integer.parseInt(col);
-        return new int[]{inrow, inCol};
+        String col = space.substring(0, 1), row = space.substring(1);
+        int inrow = Integer.parseInt(row);
+        return new int[]{selcCol(col), inrow};
     }
 
     private String translate(int[] space){
@@ -41,5 +41,41 @@ public class Control {
         else if (players[0].isDead()){
             ui.displayMessage("Player 1 wins");
         }
+    }
+    private int selcCol(String row){
+        int col = 0;
+        switch (row){
+            case "A":
+                col = 0;
+                break;
+            case "B":
+                col = 1;
+                break;
+            case "C":
+                col = 2;
+                break;
+            case "D":
+                col = 3;
+                break;
+            case "E":
+                col = 4;
+                break;
+            case "F":
+                col = 5;
+                break;
+            case "G":
+                col = 6;
+                break;
+            case "H":
+                col = 7;
+                break;
+            case "I":
+                col = 8;
+                break;
+            case "J":
+                col = 9;
+                break;
+        }
+        return col;
     }
 }

@@ -7,7 +7,7 @@ public class UI {
     ConsoleIO consoleIO = new ConsoleIO();
 
     public void displayBoard(Board board){
-        String boardStr = "    ";
+        String boardStr = String.format("%s:\n    ", board.getName());
         for (char ch : board.COL_SIGNIFIERS){
             boardStr += ch + "  ";
         }

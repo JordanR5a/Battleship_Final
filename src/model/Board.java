@@ -17,9 +17,15 @@ public class Board {
     private int[][] PATROL_COAT_LOCATION;
 
     private char[][] board;
+    private String name;
 
-    public Board() {
+    public Board(String name) {
+        this.name = name;
         this.board = fillNullBoard();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public char[][] getBoard() {

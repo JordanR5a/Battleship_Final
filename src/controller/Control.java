@@ -21,7 +21,7 @@ public class Control {
     }
 
     private void main(){
-        int input = 0;
+        int input;
         do{
             input = ui.promptForMenuSelection(mainMenu);
             switch (input){
@@ -40,8 +40,9 @@ public class Control {
     private void createPlayer(Player[] players){
         for (int i = 0; i < players.length; i++) {
             if (players[i].getClass() == Artificial.class) this.players[i] = new Artificial(
-                    new Board(), new Board(), DEFAULT_NAMES[i]);
-            else if (players[i].getClass() == Natural.class) this.players[i] = new Natural(new Board(), new Board(),
+                    new Board("Home Board"), new Board("Target Board"), DEFAULT_NAMES[i]);
+            else if (players[i].getClass() == Natural.class) this.players[i] = new Natural(
+                    new Board("Home Board"), new Board("Target Board"),
                     ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
         }
     }

@@ -15,18 +15,20 @@ public class Artificial extends Player{
     }
 
     public int[] artificialAttack(){
-        return null;
-    }//TODO
+        int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE - 1);
+        int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE - 1);
+        return new int[]{row, col};
+    }
 
     public int[] artificialPlacement(){
-        int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE);
-        int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE);
+        int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE - 1);
+        int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE - 1);
         return new int[]{row, col};
     }
 
     public Direction artificialDirection(){
         for (Direction direction : Direction.values()){
-            if (direction.ordinal() == RandomNumGenerator.randomNum(0, Direction.values().length)) return direction;
+            if (direction.ordinal() == RandomNumGenerator.randomNum(0, Direction.values().length - 1)) return direction;
         }
         throw new IllegalStateException("Direction cannot be null");
     }

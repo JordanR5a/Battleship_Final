@@ -57,7 +57,7 @@ public class Control {
                     player.getHomeBoard().setLocation(player.placeShip(ship, player.artificialPlacement(),
                             player.artificialDirection()), ship);
                     replay = false;
-                } catch (IllegalArgumentException ex) { replay = true; }
+                } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex) { replay = true; }
             } while (replay);
         }
     }

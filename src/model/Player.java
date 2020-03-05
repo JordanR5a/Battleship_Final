@@ -1,11 +1,12 @@
 package model;
 
 public class Player {
-    private enum Direction{
+    public enum Direction{
         N,
         E,
         S,
         W
+
     }
 
     private Board homeBoard;

@@ -1,7 +1,7 @@
 package model;
 
 public class Artificial extends Player{
-    char[][] simulatedBoard;
+    Board simulatedBoard;
 
     public Artificial() {
     }

@@ -1,9 +1,6 @@
 package controller;
 
-import model.Artificial;
-import model.Board;
-import model.Natural;
-import model.Player;
+import model.*;
 import utilities.RandomNumGenerator;
 import view.UI;
 
@@ -41,9 +38,20 @@ public class Control {
         for (int i = 0; i < players.length; i++) {
             if (players[i].getClass() == Artificial.class) this.players[i] = new Artificial(
                     new Board("Home Board"), new Board("Target Board"), DEFAULT_NAMES[i]);
-            else if (players[i].getClass() == Natural.class) this.players[i] = new Natural(
-                    new Board("Home Board"), new Board("Target Board"),
-                    ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
+            else if (players[i].getClass() == Natural.class) {
+                this.players[i] = new Natural(new Board("Home Board"), new Board("Target Board"),
+                        ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
+                placeShips(i);
+            }
+        }
+    }
+
+    private void placeShips(int player){
+        for(Ship ship : Ship.values()){
+            this.players[player].placeShip(ship, translate(ui.promptForString(String.format(
+                    "Please enter the starting space of player %d's %s", (player + 1), ship.toString()), 2)),
+                    Player.Direction.valueOf(ui.promptForString(String.format("Please enter the direction (N, E, S, W) for player %d's %s",
+                            (player + 1), ship.toString()), 1).toUpperCase()));
         }
     }
 
@@ -83,7 +91,7 @@ public class Control {
         String row = space.substring(0, 1), col = space.substring(1);
         int inrow = Integer.parseInt(row);
         return new int[]{inrow, colSel(col)};
-    } //CONVERT THE COLUMN TO THE CORRESPONDING LETTER <3 LOVE YOU TO RECCEE
+    }
 
     private String translate(int[] space){
         if (space.length != 2) throw new IllegalStateException("space must have two indexes");

@@ -12,4 +12,12 @@ public enum Ship {
     public int getSize() {
         return size;
     }
+
+    @Override
+    public String toString() {
+        String start = this.name().substring(0, 1);
+        String rest = this.name().substring(1).toLowerCase();
+        return String.format("%s%s", start, rest);
+    }
+
 }

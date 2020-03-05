@@ -12,7 +12,7 @@ public class Control {
     private final String[] mainMenu = {"Human vs Human", "Human vs Computer", "Exit"};
     private final String[] turnMenu = {"Show Board", "Target the Enemy"};
     private UI ui = new UI();
-    private Player[] players;
+    private Player[] players = new Player[2];
     private  static final String[] DEFAULT_NAMES= {"Player 1", "Player 2"};
 
     public static void main(String[] args) {
@@ -47,8 +47,9 @@ public class Control {
     }
 
     private void playerTurn(int playerIndex){
-        int input = ui.promptForMenuSelection(turnMenu);
+        int input;
         do{
+            input = ui.promptForMenuSelection(turnMenu);
             switch (input){
                 case 1:
                     ui.displayBoard(players[playerIndex].getHomeBoard());
@@ -81,7 +82,7 @@ public class Control {
         String row = space.substring(0, 1), col = space.substring(1);
         int inrow = Integer.parseInt(row), inCol = Integer.parseInt(col);
         return new int[]{inrow, inCol};
-    }
+    } //CONVERT THE COLUMN TO THE CORRESPONDING LETTER
 
     private String translate(int[] space){
         if (space.length != 2) throw new IllegalStateException("space must have two indexes");

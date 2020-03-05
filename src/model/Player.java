@@ -5,8 +5,15 @@ public class Player {
         N,
         E,
         S,
-        W
+        W;
 
+        public static Direction valueOfSpecial(String str){
+            try{
+                return Direction.valueOf(str);
+            } catch (IllegalArgumentException ex){
+                throw new IllegalArgumentException("You input does not match an acceptable direction. Please, try again.");
+            }
+        }
     }
 
     private Board homeBoard;
@@ -52,7 +59,9 @@ public class Player {
             } else if ((direction == Direction.W)){
                 startingSpace[1] -= 1;
             }
-            loc[i] = startingSpace;
+            for (int j = 0; j < loc[i].length; j++) {
+                loc[i][j] = startingSpace[j];
+            }
         }
         if (acceptable){
             for (int i = 0; i < loc.length; i++) {

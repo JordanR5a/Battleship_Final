@@ -47,11 +47,21 @@ public class Control {
     }
 
     private void placeShips(int player){
+        boolean replay;
         for(Ship ship : Ship.values()){
-            this.players[player].placeShip(ship, translate(ui.promptForString(String.format(
-                    "Please enter the starting space of player %d's %s", (player + 1), ship.toString()), 2)),
-                    Player.Direction.valueOf(ui.promptForString(String.format("Please enter the direction (N, E, S, W) for player %d's %s",
-                            (player + 1), ship.toString()), 1).toUpperCase()));
+            do{
+                try{
+                    this.players[player].placeShip(ship, translate(ui.promptForString(String.format(
+                            "Please enter the starting space of %s's %s", this.players[player].getName(), ship.toString()), 2)),
+                            Player.Direction.valueOfSpecial(ui.promptForString(String.format("Please enter the direction (N, E, S, W) for %s's %s",
+                                    this.players[player].getName(), ship.toString()), 1).toUpperCase()));
+                    ui.displayBoard(this.players[player].getHomeBoard());
+                    replay = false;
+                } catch (IllegalArgumentException ex) {
+                    ui.displayError(ex.getMessage());
+                    replay = true;
+                }
+            } while (replay);
         }
     }
 
@@ -88,7 +98,7 @@ public class Control {
 
     private int[] translate(String space){
         if(space.length() != 2) throw new IllegalStateException("space must have two characters");
-        String row = space.substring(0, 1), col = space.substring(1);
+        String row = space.trim().substring(0, 1), col = space.trim().substring(1);
         int inrow = Integer.parseInt(row);
         return new int[]{inrow, colSel(col)};
     }

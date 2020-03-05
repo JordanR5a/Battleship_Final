@@ -1,6 +1,7 @@
 package model;
 
 import controller.Control;
+import utilities.RandomNumGenerator;
 
 public class Artificial extends Player{
     private Board simulatedBoard;
@@ -18,13 +19,17 @@ public class Artificial extends Player{
     }//TODO
 
     public int[] artificialPlacement(){
-
-        return null;
-    }//TODO
+        int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE);
+        int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE);
+        return new int[]{row, col};
+    }
 
     public Direction artificialDirection(){
-        return null;
-    } //TODO
+        for (Direction direction : Direction.values()){
+            if (direction.ordinal() == RandomNumGenerator.randomNum(0, Direction.values().length)) return direction;
+        }
+        throw new IllegalStateException("Direction cannot be null");
+    }
 
     private char[][] simulatedArray() {
         char[][] simulation = new char[getTargetBoard().ROW_SIZE][getTargetBoard().COL_SIZE];

@@ -16,7 +16,8 @@ public class Control {
     private  static final String[] DEFAULT_NAMES= {"Player 1", "Player 2"};
 
     public static void main(String[] args) {
-
+        Control control = new Control();
+        control.main();
     }
 
     private void main(){
@@ -40,7 +41,7 @@ public class Control {
         for (int i = 0; i < players.length; i++) {
             if (players[i].getClass() == Artificial.class) this.players[i] = new Artificial(
                     new Board(), new Board(), DEFAULT_NAMES[i]);
-            if (players[i].getClass() == Natural.class) this.players[i] = new Natural(new Board(), new Board(),
+            else if (players[i].getClass() == Natural.class) this.players[i] = new Natural(new Board(), new Board(),
                     ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
         }
     }
@@ -73,7 +74,7 @@ public class Control {
             else playerTurn(current--);
         } while (!players[0].isDead() && !players[1].isDead());
         declareOutcome();
-    } // TODO
+    }
 
     private int[] translate(String space){
         if(space.length() != 2) throw new IllegalStateException("space must have two characters");

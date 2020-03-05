@@ -1,7 +1,5 @@
 package model;
 
-import view.UI;
-
 public class Player {
     private enum Direction{
         N,
@@ -13,6 +11,9 @@ public class Player {
     private Board homeBoard;
     private Board targetBoard;
     private String name;
+
+    public Player() {
+    }
 
     public Player(Board homeBoard, Board targetBoard, String name) {
         this.homeBoard = homeBoard;

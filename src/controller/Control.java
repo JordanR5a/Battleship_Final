@@ -81,9 +81,9 @@ public class Control {
     private int[] translate(String space){
         if(space.length() != 2) throw new IllegalStateException("space must have two characters");
         String row = space.substring(0, 1), col = space.substring(1);
-        int inrow = Integer.parseInt(row), inCol = Integer.parseInt(col);
-        return new int[]{inrow, inCol};
-    } //CONVERT THE COLUMN TO THE CORRESPONDING LETTER
+        int inrow = Integer.parseInt(row);
+        return new int[]{inrow, colSel(col)};
+    } //CONVERT THE COLUMN TO THE CORRESPONDING LETTER <3 LOVE YOU TO RECCEE
 
     private String translate(int[] space){
         if (space.length != 2) throw new IllegalStateException("space must have two indexes");
@@ -100,5 +100,42 @@ public class Control {
         } else if (players[0].isDead()){
             ui.displayMessage("Player 1 wins");
         }
+    }
+
+    private int colSel(String col){
+        int colo = 0;
+        switch (col){
+            case "A":
+                colo = 0;
+                break;
+            case "B":
+                colo = 1;
+                break;
+            case "C":
+                colo = 2;
+                break;
+            case "D":
+                colo = 3;
+                break;
+            case "E":
+                colo = 4;
+                break;
+            case "F":
+                colo = 5;
+                break;
+            case "G":
+                colo = 6;
+                break;
+            case "H":
+                colo = 7;
+                break;
+            case "I":
+                colo = 8;
+                break;
+            case "J":
+                colo = 9;
+                break;
+        }
+        return colo;
     }
 }

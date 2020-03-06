@@ -27,8 +27,9 @@ public class Artificial extends Player{
     }
 
     public Direction artificialDirection(){
+        int rand = RandomNumGenerator.randomNum(0, Direction.values().length - 1);
         for (Direction direction : Direction.values()){
-            if (direction.ordinal() == RandomNumGenerator.randomNum(0, Direction.values().length - 1)) return direction;
+            if (direction.ordinal() == rand) return direction;
         }
         throw new IllegalStateException("Direction cannot be null");
     }

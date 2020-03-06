@@ -82,6 +82,7 @@ public class Control {
     }
 
     private void playerTurn(int playerIndex){
+        ui.displayMessage(String.format("%s's turn is in progress...", players[playerIndex].getName()));
         if (players[playerIndex].getClass() == Natural.class) {
             int input;
             do {
@@ -110,7 +111,6 @@ public class Control {
             else enemy = 0;
             int[] space = player.artificialAttack();
             player.attackSpace(space, players[enemy].getHomeBoard());
-            ui.displayBoard(players[playerIndex].getTargetBoard());
             players[enemy].spaceAttacked(space);
         }
     }

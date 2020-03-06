@@ -17,19 +17,27 @@ public class Player {
         this.name = name;
     }
 
-    public void spaceAttacked(int[] space){
+    public boolean spaceAttacked(int[] space){
         if (homeBoard.checkSpace(space) == homeBoard.SHIP_SIGNIFIER){
             homeBoard.mutateSpace(space, homeBoard.HIT_SIGNIFIER);
+            return true;
         } else if (homeBoard.checkSpace(space) == homeBoard.EMPTY_SIGNIFIER){
             homeBoard.mutateSpace(space, homeBoard.MISS_SIGNIFIER);
+            return false;
+        } else {
+            throw new IllegalStateException("Space cannot be found");
         }
     }
 
-    public void attackSpace(int[] space, Board enemyBoard){
+    public boolean attackSpace(int[] space, Board enemyBoard){
         if (enemyBoard.checkSpace(space) == enemyBoard.SHIP_SIGNIFIER){
             targetBoard.mutateSpace(space, targetBoard.HIT_SIGNIFIER);
+            return true;
         } else if (enemyBoard.checkSpace(space) == enemyBoard.EMPTY_SIGNIFIER){
             targetBoard.mutateSpace(space, targetBoard.MISS_SIGNIFIER);
+            return false;
+        } else {
+            throw new IllegalStateException("Space cannot be found");
         }
     }
 

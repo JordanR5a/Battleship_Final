@@ -20,6 +20,13 @@ public class Artificial extends Player{
         return new int[]{row, col};
     }
 
+    public int[] simulatedArtificialAttack(){
+        simulatedControl = new Control();
+        simulatedBoard = new Board(simulatedArray());
+
+        return null;
+    }
+
     public int[] artificialPlacement(){
         int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE - 1);
         int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE - 1);

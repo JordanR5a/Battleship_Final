@@ -24,6 +24,10 @@ public class Board {
         this.board = fillNullBoard();
     }
 
+    public Board(char[][] board) {
+        this.board = board;
+    }
+
     public String getName() {
         return name;
     }

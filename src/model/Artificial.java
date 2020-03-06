@@ -20,7 +20,7 @@ public class Artificial extends Player{
         return new int[]{row, col};
     }
 
-    public int[] simulatedArtificialAttack(){
+    private int[] simulatedArtificialAttack(){
         simulatedControl = new Control();
         simulatedBoard = new Board(simulatedArray());
 

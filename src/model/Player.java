@@ -95,16 +95,5 @@ public class Player {
         return name;
     }
 
-    public static void main(String[] args) {
-        Natural player1 = new Natural(new Board("jdsaf"), new Board("dsafhs"), "player 1");
-        player1.getHomeBoard().setCARRIER_LOCATION(player1.placeShip(Ship.CARRIER, new int[]{0, 0}, Direction.S));
-        player1.getHomeBoard().setBATTLESHIP_LOCATION(player1.placeShip(Ship.BATTLESHIP, new int[]{0, 1}, Direction.S));
-        player1.getHomeBoard().setDESTROYER_LOCATION(player1.placeShip(Ship.DESTROYER, new int[]{0, 2}, Direction.S));
-        player1.getHomeBoard().setSUBMARINE_LOCATION(player1.placeShip(Ship.SUBMARINE, new int[]{0, 3}, Direction.S));
-        player1.getHomeBoard().setPATROL_COAT_LOCATION(player1.placeShip(Ship.PATROL_BOAT, new int[]{0, 4}, Direction.S));
-        new UI().displayBoard(player1.getHomeBoard());
-        System.out.println(player1.isDead());
-    }
-
 }
 

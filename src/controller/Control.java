@@ -62,7 +62,7 @@ public class Control {
                     player.getHomeBoard().setLocation(player.placeShip(ship, player.artificialPlacement(),
                             player.artificialDirection()), ship);
                     replay = false;
-                } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException ex) { replay = true; }
+                } catch (IllegalArgumentException | IllegalStateException ex) { replay = true; }
             } while (replay);
         }
     }
@@ -109,8 +109,8 @@ public class Control {
                                 space = translate(ui.promptForString("Please enter the space you wish to target", 2));
                                 players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
                                 replay = false;
-                            } catch (IllegalStateException ex){
-                                ui.displayError("This space has already been attacked.");
+                            } catch (Exception ex){
+                                ui.displayError(ex.getMessage());
                                 replay = true;
                             }
                         } while (replay);
@@ -153,7 +153,8 @@ public class Control {
     }
 
     private int[] translate(String space){
-        if(space.length() != 2) throw new IllegalArgumentException("space must have two characters");
+        if(space.length() != 2) throw new IllegalArgumentException(
+                "Your input must have two characters. Please, try again.");
         String row = space.trim().substring(0, 1), col = space.trim().substring(1).toUpperCase();
         char charCol;
         int inrow;

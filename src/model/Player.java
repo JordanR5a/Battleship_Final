@@ -35,7 +35,7 @@ public class Player {
             targetBoard.mutateSpace(space, targetBoard.MISS_SIGNIFIER);
             return false;
         } else {
-            throw new IllegalStateException("Space cannot be found");
+            throw new IllegalStateException("This space has already been attacked");
         }
     }
 

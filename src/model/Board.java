@@ -47,11 +47,19 @@ public class Board {
     }
 
     public char checkSpace(int[] space){
-        return board[space[0]][space[1]];
+        try {
+            return board[space[0]][space[1]];
+        } catch (ArrayIndexOutOfBoundsException ex){
+            throw new IllegalStateException("The inputted space does not exist");
+        }
     }
 
     public void mutateSpace(int[] space, char signifier) {
-        board[space[0]][space[1]] = signifier;
+        try {
+            board[space[0]][space[1]] = signifier;
+        } catch (ArrayIndexOutOfBoundsException ex){
+            throw new IllegalStateException("The inputted space does not exist");
+        }
     }
 
     public void setCARRIER_LOCATION(int[][] CARRIER_LOCATION) {

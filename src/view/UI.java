@@ -7,20 +7,22 @@ public class UI {
     ConsoleIO consoleIO = new ConsoleIO();
 
     public void displayBoard(Board board){
-        String boardStr = String.format("%s:\n    ", board.getName());
-        for (char ch : board.COL_SIGNIFIERS){
+        String boardStr = "________________________________________\n";
+        boardStr += String.format("%s:\n    ", board.getName());
+        for (char ch : Board.COL_SIGNIFIERS){
             boardStr += ch + "  ";
         }
         boardStr += "\n";
-        for (int i = 0; i < board.ROW_SIZE; i++) {
+        for (int i = 0; i < Board.ROW_SIZE; i++) {
             if (i < 9) boardStr += " " + (i + 1);
             else boardStr += i + 1;
             boardStr += "  ";
-            for (int a = 0; a < board.COL_SIZE; a++) {
+            for (int a = 0; a < Board.COL_SIZE; a++) {
                 boardStr += board.getBoard()[i][a] + "  ";
             }
             boardStr += "\n";
         }
+        boardStr += "________________________________________\n";
         displayMessage(boardStr);
     }
 

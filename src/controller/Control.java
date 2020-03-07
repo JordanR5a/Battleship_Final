@@ -6,7 +6,7 @@ import view.UI;
 
 
 public class Control {
-    private final String[] mainMenu = {"Human vs Human", "Human vs Computer", "Exit"};
+    private final String[] mainMenu = {"Human vs Human", "Human vs Computer", "Computer vs Computer", "Exit"};
     private final String[] turnMenu = {"Show Board", "Target the Enemy"};
     private UI ui = new UI();
     private Player[] players = new Player[2];
@@ -28,6 +28,10 @@ public class Control {
                     break;
                 case 2:
                     createPlayer(new Player[]{new Natural(), new Artificial()});
+                    game();
+                    break;
+                case 3:
+                    createPlayer(new Player[]{new Artificial(), new Artificial()});
                     game();
                     break;
             }
@@ -74,7 +78,7 @@ public class Control {
                                     player.getName(), ship.toString()), 1).toUpperCase())), ship);
                     ui.displayBoard(player.getHomeBoard());
                     replay = false;
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException | IllegalStateException ex) {
                     ui.displayError(ex.getMessage());
                     replay = true;
                 }
@@ -98,8 +102,18 @@ public class Control {
                         int enemy;
                         if (playerIndex == 0) enemy = 1;
                         else enemy = 0;
-                        int[] space = translate(ui.promptForString("Please enter the space you wish to target", 2));
-                        players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
+                        boolean replay;
+                        int[] space = null;
+                        do{
+                            try{
+                                space = translate(ui.promptForString("Please enter the space you wish to target", 2));
+                                players[playerIndex].attackSpace(space, players[enemy].getHomeBoard());
+                                replay = false;
+                            } catch (IllegalStateException ex){
+                                ui.displayError("This space has already been attacked.");
+                                replay = true;
+                            }
+                        } while (replay);
                         ui.displayBoard(players[playerIndex].getTargetBoard());
                         players[enemy].spaceAttacked(space);
                         break;
@@ -110,8 +124,17 @@ public class Control {
             int enemy;
             if (playerIndex == 0) enemy = 1;
             else enemy = 0;
-            int[] space = player.artificialAttack();
-            player.attackSpace(space, players[enemy].getHomeBoard());
+            boolean replay;
+            int[] space = null;
+            do{
+                try{
+                    space = player.artificialAttack();
+                    player.attackSpace(space, players[enemy].getHomeBoard());
+                    replay = false;
+                } catch (IllegalStateException ex){
+                    replay = true;
+                }
+            } while (replay);
             players[enemy].spaceAttacked(space);
         }
     }
@@ -167,6 +190,9 @@ public class Control {
         for (int i = 0; i < Board.COL_SIGNIFIERS.length; i++) {
             if (col == Board.COL_SIGNIFIERS[i]) colInt = i;
         }
+        if(colInt == -1) throw new IllegalStateException(
+                String.format("Unacceptable space. Please enter a row (between 1-%d) and a column (between %c-%c).",
+                        Board.ROW_SIZE, Board.COL_SIGNIFIERS[0], Board.COL_SIGNIFIERS[Board.COL_SIGNIFIERS.length-1]));
         return colInt;
     }
 }

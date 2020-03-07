@@ -171,8 +171,8 @@ public class Control {
     private String translate(int[] space){
         if (space.length != 2) throw new IllegalStateException("space must have two indexes");
         String spaceTra = null;
-        for (int i = 0; i < space.length; i++) {
-            spaceTra = String.valueOf(space[i]);
+        for (int i : space) {
+            spaceTra = String.valueOf(i);
         }
         return spaceTra;
     }

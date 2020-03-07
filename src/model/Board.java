@@ -2,8 +2,8 @@ package model;
 
 public class Board {
     public static final char[] COL_SIGNIFIERS = {'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    public final int ROW_SIZE = 10;
-    public final int COL_SIZE = 10;
+    public static final int ROW_SIZE = 10;
+    public static final int COL_SIZE = 10;
 
     public final char SHIP_SIGNIFIER = 'S';
     public final char HIT_SIGNIFIER = 'H';

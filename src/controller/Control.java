@@ -37,13 +37,14 @@ public class Control {
     private void createPlayer(Player[] players){
         for (int i = 0; i < players.length; i++) {
             if (players[i].getClass() == Artificial.class) {
-                this.players[i] = new Artificial(new Board("Home Board"),
-                        new Board("Target Board"), DEFAULT_NAMES[i]);
+                this.players[i] = new Artificial(new Board(String.format("%s's Home Board", DEFAULT_NAMES[i])),
+                        new Board(String.format("%s's Target Board", DEFAULT_NAMES[i])), DEFAULT_NAMES[i]);
                 placeArtificialShips((Artificial)this.players[i]);
             }
             else if (players[i].getClass() == Natural.class) {
-                this.players[i] = new Natural(new Board("Home Board"), new Board("Target Board"),
-                        ui.promptForString(String.format("Please enter player %d's name", i + 1), 1));
+                String name = ui.promptForString(String.format("Please enter player %d's name", i + 1), 1);
+                this.players[i] = new Natural(new Board(String.format("%s's Home Board", name)),
+                        new Board(String.format("%s's Target Board", name)), name);
                 placeShips(this.players[i]);
             }
         }
@@ -131,8 +132,16 @@ public class Control {
     private int[] translate(String space){
         if(space.length() != 2) throw new IllegalArgumentException("space must have two characters");
         String row = space.trim().substring(0, 1), col = space.trim().substring(1).toUpperCase();
-        char charCol = col.charAt(0);
-        int inrow = Integer.parseInt(row);
+        char charCol;
+        int inrow;
+        try{
+            charCol = col.charAt(0);
+            inrow = Integer.parseInt(row);
+        } catch (NumberFormatException ex){
+            throw new NumberFormatException(String.format(
+                    "Unacceptable space. Please enter a row (between 1-%d) and a column (between %c-%c).",
+                    Board.ROW_SIZE, Board.COL_SIGNIFIERS[0], Board.COL_SIGNIFIERS[Board.COL_SIGNIFIERS.length-1]));
+        }
         return new int[]{(inrow - 1), colSel(charCol)};
     }
 

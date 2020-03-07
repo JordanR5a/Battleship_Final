@@ -1,7 +1,5 @@
 package model;
 
-import view.UI;
-
 public class Player {
 
     private Board homeBoard;

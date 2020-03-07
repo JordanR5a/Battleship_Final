@@ -15,8 +15,8 @@ public class Artificial extends Player{
     }
 
     public int[] artificialAttack(){
-        int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE - 1);
-        int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE - 1);
+        int row = RandomNumGenerator.randomNum(0, Board.ROW_SIZE - 1);
+        int col = RandomNumGenerator.randomNum(0, Board.COL_SIZE - 1);
         return new int[]{row, col};
     }
 
@@ -28,8 +28,8 @@ public class Artificial extends Player{
     }
 
     public int[] artificialPlacement(){
-        int row = RandomNumGenerator.randomNum(0, getHomeBoard().ROW_SIZE - 1);
-        int col = RandomNumGenerator.randomNum(0, getHomeBoard().COL_SIZE - 1);
+        int row = RandomNumGenerator.randomNum(0, Board.ROW_SIZE - 1);
+        int col = RandomNumGenerator.randomNum(0, Board.COL_SIZE - 1);
         return new int[]{row, col};
     }
 
@@ -42,9 +42,9 @@ public class Artificial extends Player{
     }
 
     private char[][] simulatedArray() {
-        char[][] simulation = new char[getTargetBoard().ROW_SIZE][getTargetBoard().COL_SIZE];
-        for (int i = 0; i < getTargetBoard().ROW_SIZE; i++) {
-            for (int a = 0; a < getTargetBoard().COL_SIZE; a++) {
+        char[][] simulation = new char[Board.ROW_SIZE][Board.COL_SIZE];
+        for (int i = 0; i < Board.ROW_SIZE; i++) {
+            for (int a = 0; a < Board.COL_SIZE; a++) {
                 simulation[i][a] = getTargetBoard().getBoard()[i][a];
             }
         }
